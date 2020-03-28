@@ -1,13 +1,4 @@
-# tinysynth
+`npm i`
+`npm start`
 
-This experiment might be renamed *tinytracks* later at some point, depending on what it becomes.
-
-## Setup instructions
-
-You'll need node and npm installed, then:
-
-```
-$ npm i
-$ npm start
-```
-
+in both `tinysynth-app` and `tinysynth-server`
