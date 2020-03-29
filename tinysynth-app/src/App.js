@@ -162,11 +162,6 @@ function Controls({bpm, updateBPM, playing, start, stop, addTrack, share, emit})
         <td colSpan="13">
           <Slider min={30} max={240} value={bpm} onChange={onChange} />
         </td>
-        <td colSpan="2">
-          <FABButton mini onClick={share} title="Share">
-            <Icon name="share" />
-          </FABButton>
-        </td>
       </tr>
     </tfoot>
   );
@@ -381,13 +376,6 @@ class App extends Component {
         {shareHash ?
           <ShareDialog hash={shareHash} closeDialog={closeDialog} /> : null}
         <table>
-          <tr>
-            <td colSpan="19">
-              <p style={{textAlign: "right"}}>
-                <Button type="button" colored onClick={randomSong}>I am uninspired, get me some random tracks</Button>
-              </p>
-            </td>
-          </tr>
           <TrackListView
             tracks={tracks}
             currentBeat={currentBeat}
