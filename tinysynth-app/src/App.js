@@ -372,9 +372,6 @@ class App extends Component {
     const {updateBPM, start, stop, addTrack, share, randomSong, closeDialog, emit} = this;
     return (
       <div className="app">
-        <h3>tinysynth</h3>
-        {shareHash ?
-          <ShareDialog hash={shareHash} closeDialog={closeDialog} /> : null}
         <table>
           <TrackListView
             tracks={tracks}
