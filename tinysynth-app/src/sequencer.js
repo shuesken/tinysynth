@@ -19,6 +19,9 @@ export function create(tracks: Track[], beatNotifier: BeatNotifier): Tone.Sequen
   );
 
   Tone.Transport.bpm.value = 120;
+  if (Tone.context.state !== 'running') {
+    Tone.context.resume();
+  }
   Tone.Transport.start();
 
   return loop;
@@ -36,20 +39,20 @@ export function updateBPM(bpm: number): void {
 function loopProcessor(tracks, beatNotifier: BeatNotifier) {
   // XXX this may be now totally unnecessary as we can infer the sample url
   // directly from the name
-  const urls = tracks.reduce((acc, {name}) => {
-    return {...acc, [name]: `audio/${name}.wav`};
+  const urls = tracks.reduce((acc, { name }) => {
+    return { ...acc, [name]: `audio/${name}.wav` };
   }, {});
 
-  const keys = new Tone.MultiPlayer({urls}).toMaster();
+  const keys = new Tone.MultiPlayer({ urls }).toMaster();
 
   return (time, index) => {
     beatNotifier(index);
-    tracks.forEach(({name, vol, muted, beats}) => {
+    tracks.forEach(({ name, vol, muted, beats }) => {
       if (beats[index]) {
         try {
           // XXX "1n" should be set via some "resolution" track prop
           keys.start(name, time, 0, "1n", 0, muted ? 0 : velocities[index] * vol);
-        } catch(e) {
+        } catch (e) {
           // We're most likely in a race condition where the new sample hasn't been loaded
           // just yet; silently ignore, it will resiliently catch up later.
         }
