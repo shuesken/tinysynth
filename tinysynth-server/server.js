@@ -8,6 +8,12 @@ const index = require('./routes/index')
 const app = express()
 app.use(index)
 
+const cors = require('cors')
+const corsOptions = {
+  origin: true // allow all
+}
+app.use(cors(corsOptions))
+
 const server = http.createServer(app)
 
 const io = socketIo(server)

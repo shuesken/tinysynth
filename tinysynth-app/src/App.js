@@ -212,7 +212,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const endpoint = 'http://127.0.0.1:4001'
+    const endpoint = 'https://server.beats.lollygagging.party'
     console.log('trying to connect to socket at endpoint ' + endpoint)
 
     this.socket = socketIOClient(endpoint);
